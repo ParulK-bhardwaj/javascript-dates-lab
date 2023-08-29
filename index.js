@@ -23,7 +23,7 @@ console.log('-------- Age --------')
 // You can make a date from almost any 
 // human readable string for example: 
 const bday = new Date('Sept 26, 1965')
-const pBday = new Date('2/4/1988')
+const pBday = new Date('1/5/1987')
 
 // Challenge: Calculate your age with JS
 const ageInMs = today - pBday 
@@ -59,7 +59,7 @@ const months = ['Jan','Feb','Mar','Apr','May','Jun', 'Jul','Aug','Sep','Oct','No
 console.log(months[newYear.getMonth()])
 
 // Challenge: Show the month of your birthday
-let myBday = new Date(1988, 3, 2)
+let myBday = new Date(2010, 2, 1)
 console.log(`My Birth Month: ${months[myBday.getMonth()]}`)
 
 // Days of the week are also 0 indexed 0:Sun - 6:Sat 
@@ -180,9 +180,19 @@ console.log('--------- Problem 3 --------')
 function nextDate(dates) {
   // find the date that will happen next in dates
   // return the next date
+  const today = new Date();
+    
+  const futureDates = dates.filter(date => date > today);
+  const sortedDates = futureDates.sort((a, b) => a - b);
+  
+  if (sortedDates.length > 0) {
+      return `Your next appointment is ${sortedDates[0].getDate() - today.getDate()} days from now.`;
+  } else {
+      return null
+  }
 }
 
-nextDate([today, dueDate, startDate, bday, newYear])
+console.log(nextDate([today, dueDate, startDate, bday, newYear]))
 
 // Stretch Goal: Return a human readable string: 
 // Your next appointment is 3 days from now. 
@@ -194,9 +204,13 @@ console.log('--------- Problem 4 --------')
 
 function whensYourParty(date, year) {
   // Find the day of the year for your birthday
+  const myBday = new Date(year, date.getMonth(), date.getDate())
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  // Challenge: Show the day of the week of your birthday
+  return(`The party is on ${days[myBday.getDay()]}!! 🥳`)
 }
 
-whensYourParty(bday, 2022)
+console.log(whensYourParty(bday, 2023))
 
 // Stretch Goal: Return an array listing all 
 // the days when your birthday occured since 
